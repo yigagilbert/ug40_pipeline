@@ -1,0 +1,30 @@
+# → Python ----------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+
+# → Environments --------------------------------------------
+.env
+.venv/
+venv/
+
+# → Packaging ------------------------------------------------
+build/
+dist/
+*.egg-info/
+
+# → Jupyter & Colab -----------------------------------------
+.ipynb_checkpoints/
+*.ipynb
+
+# → IDEs -----------------------------------------------------
+.vscode/
+.idea/
+
+# → Datasets & State ----------------------------------------
+#  Manifest is generated automatically; ignore binary DB.
+metadata/manifest.sqlite
+
+# Hugging Face cache
+~/.cache/huggingface/

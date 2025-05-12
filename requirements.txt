@@ -1,0 +1,11 @@
+# ============================================================================
+# requirements.txt (Colab convenience)
+# ============================================================================
+typer
+pydantic
+sqlmodel
+markdown2
+xxhash
+datasets
+huggingface_hub
+google-api-python-client
