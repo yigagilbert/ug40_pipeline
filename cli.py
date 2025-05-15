@@ -37,8 +37,14 @@ def run(
 ):
     """Discover, process, deduplicate and upload new data in *subsets*."""
     drive_root = Path(drive_root)
+    # Ensure metadata directory exists
+    metadata_dir = drive_root / 'metadata'
+    metadata_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = metadata_dir / 'manifest.sqlite'
+    typer.echo(f"Using manifest at: {manifest_path}")
     wanted = {s.strip() for s in subsets.split(",") if s.strip()}
-    manifest = Manifest(C.MANIFEST_PATH)
+    # manifest = Manifest(C.MANIFEST_PATH)
+    manifest = Manifest(str(manifest_path))
     hf = HFHelper(C.HF_TOKEN)
 
     # Walk local drive (mounted) instead of Drive API: simpler & free quota.

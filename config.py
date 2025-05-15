@@ -14,7 +14,7 @@ from typing import Final, Mapping
 
 # ---- Paths -----------------------------------------------------------------
 DRIVE_ROOT: Final[Path] = Path(
-    os.getenv("DRIVE_ROOT", "/content/drive/MyDrive/UG40")
+    os.getenv("DRIVE_ROOT", "/content/drive/Shareddrives/Sunbird AI - Data/UG40/Raw_Data")
 ).expanduser()
 
 MANIFEST_PATH: Final[Path] = Path(
@@ -24,7 +24,7 @@ MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 # ---- Hugging Face -----------------------------------------------------------
 HF_TOKEN: Final[str | None] = os.getenv("HF_TOKEN")  # personal‑access token
-HF_REPO_ID: Final[str] = os.getenv("HF_REPO_ID", "Sunbird/ug40")
+HF_REPO_ID: Final[str] = os.getenv("HF_REPO_ID", "yigagilbert/ug40")
 
 # ---- Category → schema model mapping ---------------------------------------
 CATEGORY_MODELS: Final[Mapping[str, str]] = {
