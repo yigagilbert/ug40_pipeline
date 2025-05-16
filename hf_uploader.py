@@ -29,6 +29,6 @@ class HFHelper:
             repo_id=repo,
             split="train",
             token=self._token,
-            congfig_name=subset,
+            congfig_name=subset
             # commit_message=f"auto‑update • {subset} • {len(ds):,} rows",
         )
