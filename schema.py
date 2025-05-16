@@ -17,5 +17,5 @@ class GeneralText(_BaseRow):
 
 
 class LanguageGuide(_BaseRow):
-    content: str = Field(..., description="Full guide text as single blob")
+    text: str = Field(..., description="Full guide text as single blob")
 
