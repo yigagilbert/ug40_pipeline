@@ -62,12 +62,19 @@ def run(
             continue  # already processed at same mtime
         content = read_text(path)
         if subset == "general_text":
+            source_name = path.stem  # or path.name for full filename
             paragraphs = split_and_clean_general(content)
             for p in paragraphs:
                 h = text_hash(p)
                 if manifest.is_duplicate_text(h):
                     continue
-                new_rows.append(GeneralText(text=p, language=lang).model_dump())
+                new_rows.append(
+                    GeneralText(
+                        text=p,
+                        language=lang,
+                        source_name=source_name
+                    ).model_dump()
+                )
                 manifest.add_text_hashes([TextHash(text_hash=h, lang=lang, subset=subset)])
         elif subset == "language_guides":
             source_name = path.stem  # or path.name for full filename
