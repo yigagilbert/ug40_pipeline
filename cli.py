@@ -70,7 +70,12 @@ def run(
                 new_rows.append(GeneralText(text=p, language=lang).model_dump())
                 manifest.add_text_hashes([TextHash(text_hash=h, lang=lang, subset=subset)])
         elif subset == "language_guides":
-            guide = LanguageGuide(text=strip_markdown(content), language=lang)
+            source_name = path.stem  # or path.name for full filename
+            guide = LanguageGuide(
+                text=strip_markdown(content),
+                language=lang,
+                source_name=source_name
+            )
             h = text_hash(guide.text)
             if not manifest.is_duplicate_text(h):
                 new_rows.append(guide.model_dump())
