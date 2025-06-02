@@ -11,6 +11,7 @@ from typing import Annotated
 
 import typer
 from datasets import Dataset  # type: ignore[import]
+from tqdm import tqdm
 
 from . import config as C
 from .dedupe import text_hash
@@ -49,7 +50,8 @@ def run(
 
     # Walk local drive (mounted) instead of Drive API: simpler & free quota.
     new_rows: list[dict] = []
-    for path in drive_root.rglob("*"):
+    all_files = list(drive_root.rglob("*"))
+    for path in tqdm(all_files, desc="Processing files"):
         if path.is_dir() or path.suffix not in {".txt", ".md"}:
             continue
         rel = path.relative_to(drive_root).as_posix()
@@ -63,14 +65,12 @@ def run(
         content = read_text(path)
         if subset == "general_text":
             source_name = path.stem  # or path.name for full filename
-            paragraphs = split_and_clean_general(content)
-            for p in paragraphs:
-                h = text_hash(p)
-                if manifest.is_duplicate_text(h):
-                    continue
+            full_text = content.strip()
+            h = text_hash(full_text)
+            if not manifest.is_duplicate_text(h):
                 new_rows.append(
                     GeneralText(
-                        text=p,
+                        text=full_text,
                         language=lang,
                         source_name=source_name
                     ).model_dump()

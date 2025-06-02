@@ -9,3 +9,4 @@ xxhash
 datasets
 huggingface_hub
 google-api-python-client
+tqdm
